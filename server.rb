@@ -3,14 +3,17 @@ require 'json'
 require './src/piratescrabble'
 
 get '/' do
-	'hello'
+	erb :index
 end
 
 get '/make-from' do
 	word = params[:word]
 
 	content_type :json
-	MakeFrom.new(word).suggestions.first(10).map(&:as_json).to_json
+	suggestions = MakeFrom.new(word).suggestions.first(10)
+	{
+		suggestions: suggestions.map(&:as_json)
+	}.to_json
 end
 
 get '/can-become' do
