@@ -7,9 +7,16 @@ class Dictionary
 
 	def initialize
 		@words = []
-		File.each_line('/usr/share/dict/words') do |line|
+		File.open('/usr/share/dict/words').each_line do |line|
 			line.chomp!
-			@words << Word.new(line)
+			word = line.strip.downcase
+			if word =~ /^[a-z]+$/
+				@words << Word.new(word)
+			end
 		end
+	end
+
+	def self.words
+		self.instance.words
 	end
 end

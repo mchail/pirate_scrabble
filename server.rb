@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require './src/piratescrabble'
 
 get '/' do
@@ -9,7 +10,7 @@ get '/make-from' do
 	word = params[:word]
 
 	content_type :json
-	MakeFrom.new(word).suggestions
+	MakeFrom.new(word).suggestions.first(10)
 end
 
 get '/can-become' do

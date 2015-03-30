@@ -1,6 +1,8 @@
 class Word
+	attr_reader :word
+
 	def initialize(word)
-		@word = word.strip
+		@word = word.strip.downcase
 	end
 
 	def frequency
@@ -9,12 +11,20 @@ class Word
 		end
 	end
 
-	def contains(other)
+	def contains?(other)
 		other.frequency.each do |char, count|
 			if frequency[char] < count
 				return false
 			end
 		end
 		true
+	end
+
+	def contains_exact?(other)
+		!@word[other.word].nil?
+	end
+
+	def to_s
+		@word
 	end
 end
