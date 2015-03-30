@@ -10,7 +10,7 @@ get '/make-from' do
 	word = params[:word]
 
 	content_type :json
-	MakeFrom.new(word).suggestions.first(10)
+	MakeFrom.new(word).suggestions.first(10).map(&:as_json).to_json
 end
 
 get '/can-become' do

@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
+    json (1.8.1)
     method_source (0.8.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -21,5 +22,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
   pry
   sinatra (~> 1.4.6)

@@ -7,7 +7,7 @@ class Dictionary
 
 	def initialize
 		@words = []
-		File.open('/usr/share/dict/words').each_line do |line|
+		File.open('./config/ospd.txt').each_line do |line|
 			line.chomp!
 			word = line.strip.downcase
 			if word =~ /^[a-z]+$/
