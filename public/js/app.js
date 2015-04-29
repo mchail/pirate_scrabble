@@ -16,24 +16,38 @@ $(document).ready(function() {
 		});
 		if (word.length >= 4) {
 			getSuggestions(word);
+		} else {
+			$suggestions.empty();
 		}
 	});
 
 	function getSuggestions(word) {
 		$.get('/make-from', {word: word}, function(data) {
+			if (word !== $input.val()) {
+				return;
+			}
 			$suggestions.empty();
 			$.each(data.suggestions, function(index, suggestion) {
 				needs = [];
 				$.each(suggestion.needs, function(chr, count) {
 					for (var _ = 0; _ < count; _++) {
-						needs.push(chr);
+						needs.push("<span class='letter small-letter'>" + chr + "</span>");
 					}
 				});
 				needs.sort();
-				var text = suggestion.to + " (needs " + needs.join(', ') + ")";
-				var $suggestion = $('<div>').addClass('suggestion').text(text);
+				var html = "<a href='http://en.wiktionary.org/wiki/" +
+					suggestion.to +
+					"' target='_blank'>" +
+					suggestion.to +
+					"</a> (needs " +
+					needs.join(', ') +
+					")";
+				var $suggestion = $('<li>').addClass('suggestion').html(html);
 				$suggestions.append($suggestion);
 			});
+			if (data.suggestions.length === 0) {
+				$suggestions.text("No results found!");
+			}
 		});
 	}
 });

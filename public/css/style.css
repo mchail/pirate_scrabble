@@ -1,10 +1,13 @@
-input {
+ input { 
 	height: 100px;
 	width: 100%;
 	font-size: 80px;
 	font-family: Consolas,monaco,monospace;
 	letter-spacing: 56px;
-	/*color: #fff;*/
+	color: #fff;
+	border: 1px solid #999;
+	outline: none;
+	background-color: #dedede;
 }
 .word {
 	position: relative;
@@ -39,10 +42,43 @@ input {
 		inset -2px -3px 0px rgba(143,128,82,0.6);
 }
 
+.small-letter {
+	width: 30px;
+	height: 17px;
+	font-size: 15px;
+	position: relative;
+	top: -6px;
+	display: inline-block;
+	padding: 7px 0;
+	line-height: inherit;
+}
+
 .suggestions {
+	position: relative;
+	left: 50%;
+	margin-left: -200px;
 	margin-top: 30px;
+	list-style-type: none;
 }
 
 .suggestion {
 	font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+	position: relative;
+	text-transform: uppercase;
+	height: 46px;
+}
+
+.suggestion a {
+	color: #000;
+	text-decoration: none;
+}
+
+.suggestion a:hover {
+	text-decoration: underline;
+}
+
+html, body {
+	font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+	font-size: 30px;
+	background-color: #ccc;
 }
