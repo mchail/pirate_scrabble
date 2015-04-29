@@ -2,12 +2,15 @@ $(document).ready(function() {
 	var $input = $('input');
 	var $letters = $('.letters');
 	var $suggestions = $('.suggestions');
-	$input.on('input', function() {
+	$input.on('input', handleInput);
+
+	function handleInput() {
 		$letters.empty();
 		$input.val(
 			$input.val().toLowerCase().replace(/[^a-z]/g, '')
 		);
 		var word = $input.val();
+		document.location.hash = word;
 		var letters = word.split('');
 		$.each(letters, function(index, letter) {
 			var $letter = $('<span>').addClass('letter').text(letter);
@@ -19,7 +22,7 @@ $(document).ready(function() {
 		} else {
 			$suggestions.empty();
 		}
-	});
+	}
 
 	function getSuggestions(word) {
 		$.get('/make-from', {word: word}, function(data) {
@@ -50,4 +53,15 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+	function handleHash() {
+		var word;
+		if (document.location.hash.length > 1) {
+			word = document.location.hash.substr(1);
+			$input.val(word);
+			handleInput();
+		}
+	}
+
+	handleHash();
 });
